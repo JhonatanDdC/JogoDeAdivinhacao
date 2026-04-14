@@ -10,12 +10,14 @@ public class Main {
         int numeroSecreto = random.nextInt(100) + 1;
         int tentativa;
         int contadorTentativa = 0;
+        int maxTentativas = 10;
 
         System.out.println("==== Jogo de Adivinhação ====");
         System.out.println("Objetivo: Acertar o número de 1 a 100");
+        System.out.println("Você tem 10 tentativas!");
 
         do {
-            System.out.print("Digite sua tentativa: ");
+            System.out.print("\nDigite sua tentativa: ");
             tentativa = in.nextInt();
             contadorTentativa++;
 
@@ -25,12 +27,16 @@ public class Main {
                 System.out.println("O número é maior!");
             } else {
                 System.out.println("Você acertou!");
+                break;
             }
+            System.out.println("\nTentativas restantes: " + (maxTentativas - contadorTentativa));
 
+        } while (contadorTentativa < maxTentativas);
 
-        } while (tentativa != numeroSecreto);
-
-        System.out.println("Você utilizou " + contadorTentativa + " tentativas!");
+        if (tentativa != numeroSecreto){
+            System.out.println("Você perdeu!");
+            System.out.println("O número correto era: " + numeroSecreto);
+        }
 
         in.close();
     }
