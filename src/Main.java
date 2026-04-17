@@ -7,14 +7,45 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Random random = new Random();
 
-        int numeroSecreto = random.nextInt(100) + 1;
+        int maxNumero;
+        int maxTentativas;
+
+        System.out.println("Escolha a sua dificuldade:");
+        System.out.println("1 - Fácil");
+        System.out.println("2 - Médio");
+        System.out.println("3 - Difícil");
+        System.out.print("---> ");
+        int dificuldade = in.nextInt();
+
+        switch(dificuldade){
+            case 1:
+                maxNumero = 50;
+                maxTentativas = 10;
+                break;
+
+            case 2:
+                maxNumero = 75;
+                maxTentativas = 5;
+                break;
+
+            case 3:
+                maxNumero = 100;
+                maxTentativas = 3;
+                break;
+
+            default:
+                System.out.println("Opção inválida! Vamos para o nível médio!");
+                maxNumero = 75;
+                maxTentativas = 5;
+        }
+
+        int numeroSecreto = random.nextInt(maxNumero) + 1;
         int tentativa;
         int contadorTentativa = 0;
-        int maxTentativas = 10;
 
         System.out.println("==== Jogo de Adivinhação ====");
-        System.out.println("Objetivo: Acertar o número de 1 a 100");
-        System.out.println("Você tem 10 tentativas!");
+        System.out.println("Objetivo: Acertar o número de 1 a " + maxNumero);
+        System.out.println("Você tem " + maxTentativas + " tentativas!");
 
         do {
             System.out.print("\nDigite sua tentativa: ");
@@ -26,7 +57,7 @@ public class Main {
             } else if (tentativa < numeroSecreto){
                 System.out.println("O número é maior!");
             } else {
-                System.out.println("Você acertou!");
+                System.out.println("\nVocê acertou!");
                 break;
             }
             System.out.println("\nTentativas restantes: " + (maxTentativas - contadorTentativa));
@@ -34,7 +65,7 @@ public class Main {
         } while (contadorTentativa < maxTentativas);
 
         if (tentativa != numeroSecreto){
-            System.out.println("Você perdeu!");
+            System.out.println("\nVocê perdeu!");
             System.out.println("O número correto era: " + numeroSecreto);
         }
 
